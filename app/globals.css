@@ -1,0 +1,159 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --crimson-red: #E62429;
+    --webbing-gold: #F2A900;
+    --web-shooter-blue: #00A4E4;
+    --suit-black: #0b0c10;
+    --web-white: #F5F5F5;
+    --venom-symbiote: #1A1A2E;
+    --radioactive-green: #39FF14;
+    --glass-overlay: rgba(11, 12, 16, 0.75);
+    --glass-border: rgba(0, 164, 228, 0.3);
+    --bg-dark: #07080a;
+  }
+
+  [data-suit="miles-morales"] {
+    --crimson-red: #E62429;
+    --webbing-gold: #39FF14;
+    --web-shooter-blue: #8B5CF6;
+    --suit-black: #050507;
+    --web-white: #F5F5F5;
+    --glass-overlay: rgba(5, 5, 7, 0.85);
+    --glass-border: rgba(230, 36, 41, 0.4);
+    --bg-dark: #030304;
+  }
+
+  [data-suit="spider-armor-iii"] {
+    --crimson-red: #38BDF8;
+    --webbing-gold: #E5E7EB;
+    --web-shooter-blue: #2563EB;
+    --suit-black: #0F172A;
+    --web-white: #F8FAFC;
+    --glass-overlay: rgba(15, 23, 42, 0.85);
+    --glass-border: rgba(56, 189, 248, 0.35);
+    --bg-dark: #080D1A;
+  }
+
+  [data-suit="symbiote"] {
+    --crimson-red: #DC2626;
+    --webbing-gold: #39FF14;
+    --web-shooter-blue: #312E81;
+    --suit-black: #030305;
+    --web-white: #F3F4F6;
+    --glass-overlay: rgba(3, 3, 5, 0.9);
+    --glass-border: rgba(57, 255, 20, 0.3);
+    --bg-dark: #010103;
+  }
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--web-white);
+  font-family: var(--font-hud), 'Chakra Petch', system-ui, sans-serif;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(0, 164, 228, 0.08) 0%, transparent 60%),
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 100% 100%, 32px 32px, 32px 32px;
+  min-height: 100vh;
+}
+
+/* Custom Animations & Glow Utilities */
+@keyframes spider-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(230, 36, 41, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 16px rgba(230, 36, 41, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(230, 36, 41, 0);
+  }
+}
+
+@keyframes web-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes radar-sweep {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spider-pulse {
+  animation: spider-pulse 1.8s ease-out infinite;
+}
+
+.animate-web-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: web-shimmer 2.5s infinite linear;
+}
+
+.animate-radar-sweep {
+  animation: radar-sweep 8s linear infinite;
+}
+
+.hud-panel {
+  background: var(--glass-overlay);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  position: relative;
+}
+
+/* Tech-file Corner Brackets */
+.tech-bracket::before,
+.tech-bracket::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-color: var(--webbing-gold);
+  pointer-events: none;
+}
+.tech-bracket::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid var(--webbing-gold);
+  border-left: 2px solid var(--webbing-gold);
+}
+.tech-bracket::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid var(--webbing-gold);
+  border-right: 2px solid var(--webbing-gold);
+}
+
+/* Custom Scrollbar for HUD Feed */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.4);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--web-shooter-blue);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--crimson-red);
+}
